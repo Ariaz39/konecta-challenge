@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ProductRepository;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Repositories\CategoryRepository;
@@ -12,11 +13,12 @@ use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
-    public $repositoryCategory;
+    protected $repositoryCategory;
 
     public function __construct()
     {
         $this->repositoryCategory = new CategoryRepository();
+        $this->repositoryProduct = new ProductRepository();
     }
 
     /**
@@ -85,13 +87,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * Funcion que elimina una categoria
+     * Funcion que inhabilita una categoria
      * @param $id
      * @return RedirectResponse
      */
     public function destroy($id)
     {
         $this->repositoryCategory->deleteCategory($id);
+        $this->repositoryProduct->hideProducts($id);
 
         return redirect()->route('category.index');
     }

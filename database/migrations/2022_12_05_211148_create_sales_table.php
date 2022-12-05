@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('kone_categories', function (Blueprint $table) {
-            $table->id('category_id');
-            $table->string('name', 150);
-            $table->text('description');
-            $table->tinyInteger('status')->default(1)->comment('1: Active, 2: Inactive');
-
+        Schema::create('sales', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('sales');
     }
 }

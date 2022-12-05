@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryRepository
@@ -13,7 +14,7 @@ class CategoryRepository
      */
     public function listAll(): array
     {
-        return Category::get()->toArray() ?: [];
+        return Category::where('status', 1)->get()->toArray() ?: [];
     }
 
     /**
@@ -61,6 +62,8 @@ class CategoryRepository
      */
     public function deleteCategory($id): void
     {
-        $this->showCategory($id)->delete();
+        $this->showCategory($id)->update([
+            'status' => 2
+        ]);
     }
 }

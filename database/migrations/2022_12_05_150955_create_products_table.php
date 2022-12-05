@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('weight');
             $table->unsignedBigInteger('category_id');
             $table->integer('stock');
+            $table->tinyInteger('status')->default(1)->comment('1: Active, 2: Inactive');
 
             $table->foreign('category_id')->references('category_id')->on('kone_categories');
 

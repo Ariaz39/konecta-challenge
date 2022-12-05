@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,18 @@ class Category extends Model
         'name',
         'description',
         'state',
+        'status',
         'created_at',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        $value = Carbon::parse($value)->locale('es-mx');
+        return $value->diffForHumans();
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(strtolower($value));
+    }
 }

@@ -713,6 +713,14 @@ select {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -772,6 +780,12 @@ select {
 }
 .block {
   display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
 }
 .flex {
   display: flex;

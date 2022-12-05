@@ -22,8 +22,8 @@ class UpdateCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Nombre',
-            'description' => 'Descripcion'
+            'name' => 'Nombre de la categoria',
+            'description' => 'Descripcion de la categoria'
         ];
     }
 

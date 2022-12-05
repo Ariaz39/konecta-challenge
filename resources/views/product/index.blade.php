@@ -4,6 +4,22 @@
     <a href="{{ route('product.create') }}" class="btn btn-primary">Crear nuevo</a>
 @endsection
 @section('content')
+
+    <div class="card-group mb-3">
+        <div class="card col">
+            <div class="card-body">
+                <h5 class="card-title">Producto con mas stock:</h5>
+                <p class="card-text">{{$higherStock->name}} - {{$higherStock->stock}} Unidades</p>
+            </div>
+        </div>
+        <div class="card col">
+            <div class="card-body">
+                <h5 class="card-title">Producto con mayores ventas:</h5>
+                <p class="card-text">{{$higherSales->product->name}} - {{$higherSales->number_of_orders}} Unidades</p>
+            </div>
+        </div>
+    </div>
+
     @if(empty($products))
         <div class="alert alert-danger text-sm" role="alert">
             <strong>Error!</strong> No hay productos disponibles
@@ -37,7 +53,8 @@
                     <td>
                         <a href="{{ route('product.edit', $item['product_id']) }}"
                            class="btn btn-sm btn-primary">Editar</a>
-                        <form class="d-inline-block" action="{{ route('product.delete', $item['product_id']) }}"
+                        <form class="d-inline-block"
+                              action="{{ route('product.delete', $item['product_id']) }}"
                               method="post">
                             @method('DELETE')
                             @csrf

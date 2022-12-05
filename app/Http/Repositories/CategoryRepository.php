@@ -14,7 +14,10 @@ class CategoryRepository
      */
     public function listAll(): array
     {
-        return Category::where('status', 1)->get()->toArray() ?: [];
+        return Category::where('status', 1)
+            ->orderBy('category_id', 'desc')
+            ->get()
+            ->toArray() ?: [];
     }
 
     /**

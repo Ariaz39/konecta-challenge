@@ -13,8 +13,12 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->id();
+        Schema::create('kone_sales', function (Blueprint $table) {
+            $table->id('sale_id');
+            $table->unsignedBigInteger('product_id');
+            $table->bigInteger('amount');
+
+            $table->foreign('product_id')->references('product_id')->on('kone_products');
             $table->timestamps();
         });
     }

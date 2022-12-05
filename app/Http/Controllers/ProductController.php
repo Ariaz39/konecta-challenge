@@ -28,8 +28,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->repositoryProduct->listAll();
+        $higherStock = $this->repositoryProduct->getProductWithHigherStock();
+        $higherSales = $this->repositoryProduct->getProductWithHigherSales();
 
-        return view('product.index', compact('products'));
+        return view('product.index', compact('products', 'higherStock', 'higherSales'));
     }
 
     /**

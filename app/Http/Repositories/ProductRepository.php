@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Product;
+use App\Models\Sales;
 use Illuminate\Http\Request;
 
 class ProductRepository
@@ -14,6 +15,7 @@ class ProductRepository
     public function listAll(): array
     {
         return Product::where('status', 1)
+            ->orderBy('product_id', 'desc')
             ->with('category')
             ->get()
             ->toArray() ?: [];
@@ -96,5 +98,19 @@ class ProductRepository
             ->where('stock', '>', 0)
             ->get()
             ->toArray() ?: [];
+    }
+
+    public function getProductWithHigherStock()
+    {
+        return Product::orderBy('stock', 'desc')->first() ?: 0;
+    }
+
+    public function getProductWithHigherSales()
+    {
+        return Sales::selectRaw('product_id, sum(amount) as number_of_orders')
+            ->groupBy('product_id')
+            ->orderBy('number_of_orders', 'desc')
+            ->with('product')
+            ->first() ?: [];
     }
 }

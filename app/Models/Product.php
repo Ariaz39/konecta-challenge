@@ -32,7 +32,7 @@ class Product extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        $value = Carbon::parse($value)->locale('es-mx');
+        $value = Carbon::parse($value)->locale('es-co');
         return $value->diffForHumans();
     }
 

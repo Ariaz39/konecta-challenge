@@ -22,4 +22,9 @@ class Product extends Model
         'state',
         'created_at',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
+    }
 }

@@ -2,83 +2,97 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Repositories\CategoryRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
+    public $repositoryCategory;
+
+    public function __construct()
+    {
+        $this->repositoryCategory = new CategoryRepository();
+    }
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Funcion que lista las categorias
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        $categories = $this->repositoryCategory->listAll();
+        return view('category.index', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Funcion que retorna la vista de creacion
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Funcion que inserta una categoria
+     * @param StoreCategoryRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $this->repositoryCategory->storeCategory($request);
+
+        return redirect()->route('category.index');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Funcion que obtiene la info de una categoria
+     * @param $id
+     * @return object
      */
     public function show($id)
     {
-        //
+        return $this->repositoryCategory->showCategory($id);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Funcion que retorna la vista de edicion
+     * @param $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
-        //
+        $category = $this->show($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Funcion que actualiza una categoria
+     * @param UpdateCategoryRequest $request
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        //
+        $this->repositoryCategory->updateCategory($id, $request);
+
+        return redirect()->route('category.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Funcion que elimina una categoria
+     * @param $id
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $this->repositoryCategory->deleteCategory($id);
+
+        return redirect()->route('category.index');
     }
 }

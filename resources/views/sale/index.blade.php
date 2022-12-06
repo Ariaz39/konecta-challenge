@@ -42,7 +42,6 @@
             </div>
 
             <button type="submit" class="btn btn-success">Vender</button>
-            <a href="{{ route('sale.index') }}" class="btn btn-warning">Cancelar</a>
         </form>
     @endif
 

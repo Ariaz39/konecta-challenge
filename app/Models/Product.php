@@ -40,4 +40,14 @@ class Product extends Model
     {
         $this->attributes['name'] = ucfirst(strtolower($value));
     }
+
+    public function getReferenceAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value, 0);
+    }
 }

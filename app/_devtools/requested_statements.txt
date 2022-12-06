@@ -1,0 +1,16 @@
+# Seleccionar producto que mas stock tiene:
+
+SELECT product_id, name, stock FROM kone_products
+ORDER BY stock desc
+LIMIT 1;
+
+########
+
+# Seleccionar producto con mayor cantidad de ventas:
+
+SELECT product.name, SUM(sales.amount) 
+FROM kone_products AS product
+JOIN kone_sales AS sales ON sales.product_id = product.product_id
+GROUP BY product.name 
+ORDER BY sum(sales.amount) DESC
+LIMIT 1

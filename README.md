@@ -42,6 +42,9 @@ php artisan serve
 4. Go to sales view to sell a product
 5. Enjoy!
 
+***
+### Additionally, the requested statements are attached in .txt format in the path folder. And in the email sent 
+> app/_devtools/requested_statements.txt
+
 
 Autor: [Jorge Alejandro Arias Villalba © 2022](https://github.com/Ariaz39)
-

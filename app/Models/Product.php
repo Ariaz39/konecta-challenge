@@ -45,9 +45,4 @@ class Product extends Model
     {
         return strtoupper($value);
     }
-
-    public function getPriceAttribute($value)
-    {
-        return number_format($value, 0);
-    }
 }
